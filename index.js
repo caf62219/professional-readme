@@ -2,11 +2,13 @@
 const inquirer= require('inquirer');
 const fs = require('fs');
 
+let licenseBadge;
  
-
+//function that will take inputted data to create the README
 const generateREADME = ({title, description, installation,usage, usageImage, license, contributing,tests, questionsGithubUsername, questionsGithubURL, questionsEmail}) =>
+//template literal of README
 `# ${title}
-<a href= "https://img.shields.io/badge/${license}.svg" alt= "license badge" > </a>
+<img src= "https://img.shields.io/badge/${licenseBadge}.svg" alt= "license badge" > 
 
 ## Description
 
@@ -44,16 +46,17 @@ ${tests}.
 
 ## Questions
 
-If you have any questions you can reach me at:
+If you have any questions or need to report issues you can reach me at:
 
 -   GitHub Username: ${questionsGithubUsername} <br>
 -   GitHub URL: <a  href="${questionsGithubURL}">${questionsGithubURL}</a> <br>
 -   Email Address: <a href="mailto:${questionsEmail}">${questionsEmail}</a>
 `
 
-// array of questions for user input
+//using the inquirer package
 inquirer
     .prompt([
+        // array of questions for user input
         {
              type: 'input',
             message: 'What is the title of your project?',
@@ -80,7 +83,7 @@ inquirer
             name: 'usageImage'
         },
         {
-            type: 'checkbox',
+            type: 'list',
             message: 'What license applies to this project?',
             name: 'license',
             choices:[ 
@@ -89,7 +92,7 @@ inquirer
         },
         {
              type: 'input',
-            message: 'List any contributers for this project',
+            message: 'Describe how to make contributions to this project.',
             name: 'contributing',
         },
         {
@@ -114,50 +117,54 @@ inquirer
         },
     ])
 
-// TODO: Create a function to write README file
+    //getting the answers back from the prompt
    .then ((answers) => {
+//setting the badge link based on the license chosen
     switch(answers.license){ 
         case "Apache License 2.0":
-            return "License-Apache_2.0-blue";
+            licenseBadge= "License-Apache_2.0-blue";
             break;
         case "GNU General Public License v 3.0":
-            return "License-GPLv3-blue";
+            licenseBadge=  "License-GPLv3-blue";
             break;
         case "MIT License":
-            return "License-MIT-yellow";
+            licenseBadge=  "License-MIT-yellow";
             break;
         case "BSD License":
-            return "License-BSD_3--Clause-blue";
+            licenseBadge=  "License-BSD_3--Clause-blue";
             break;
         case "Boost Software License":
-            return "License-Boost_1.0-lightblue";
+            licenseBadge=  "License-Boost_1.0-lightblue";
             break;
         case  "Creative Commons Zero v 1.0 Universal":
-            return "License-CC0_1.0-lightgrey";
+            licenseBadge=  "License-CC0_1.0-lightgrey";
             break;
         case "The Unlicense":
-            return "license-Unlicense-blue";
+            licenseBadge=  "license-Unlicense-blue";
             break;
         case "Eclipse Public License 2.0":
-            return "License-EPL_1.0-red";
+            licenseBadge=  "License-EPL_1.0-red";
             break;
         case "GNU Affero General Public License v 3.0":
-            return "License-GPLv3-blue";
+            licenseBadge=  "License-GPLv3-blue";
             break;
         case "GNU General Public License v 2.0":
-            return "License-GPL_v2-blue";
+            licenseBadge=  "License-GPL_v2-blue";
             break;
         case "Mozilla Public License 2.0":
-            return "License-MPL_2.0-brightgreen";
+            licenseBadge=  "License-MPL_2.0-brightgreen";
             break;
-    
-        default:
-            console.log ("Check your operation")
         }
-    
+    if (!licenseBadge) {
+        console.log ("Check your operation");
+        licenseBadgeSample="";
+    }
+ 
+//feeding the answers into the generateREADME function   
     const READMEContent = generateREADME(answers);
 
-    fs.writeFile('README.md', READMEContent, (err) =>
+//writing the README based on the answers to the prompts
+    fs.writeFile('writtenREADME.md', READMEContent, (err) =>
     err ? console.log(err) : console.log('Successfully created README!')) 
    } 
    ) 
