@@ -9,18 +9,19 @@
 # Installation
     -In order to install this project the user must go to the terminal and type in "node index.js" then follow the prompts on the screen.
 
-    -Follow the following URL to the video that demonstrates installation and usage:
+    -Follow the following URL to the video that demonstrates installation and usage: https://drive.google.com/file/d/1VewviFHxFT2j7hNRYJdj9LA-pWblvU7n/view?usp=sharing
     
 # Usage
     
 
-<img src="./" alt="screenshots of the README Creator" width="600px" />
+<img src="./images/terminalScreenshot.png" alt="screenshots of the README Creator in the terminal" width="600px" />
    
-    -
+    -In the terminal the user will type node index.js and then a list of questions will arise
+    -Once all the questions are answered, a new README will display in Visual Studio Code
 
-<img src="./" alt="screenshot of calendar website" width="600px" />   
+<img src="./images/VSCscreenshot.png" alt="screenshot created README in VS Code" width="600px" />   
     
-    -
+    - This is an example of a README created by the README creator as displayed in VS Code.
 
 # Credits
     Donnie Rawlings: https://github.com/drawlin22/
